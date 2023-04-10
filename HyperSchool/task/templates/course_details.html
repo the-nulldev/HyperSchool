@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <a href="{% url 'main' %}">HyperSchool</a>
+    <p><b>Feel free to choose any course</b></p>
+    <p><b>you are interested in!</b></p>
+    <p><b>Upgrade your professional skills</b></p>
+    <p><b>with our school!</b></p>
+    <div>
+        <h2>Name of the program: {{course.title}}</h2>
+    </div>
+    <div>
+        {{course.info}}
+    </div>
+    <p>Course duration: {{course.duration_months}} months</p>
+    <p>Total price: {{course.price}} $</p>
+    <p>Teachers of the course: </p>
+    {% for teacher in teachers %}
+        <a href="{% url 'teacher_details' teacher.id %}">{{ teacher.name }}</a>
+    {% endfor %}
+    <br>
+
+    <h2>Already studying:</h2>
+    <ul type="none">
+        {% for student in students %}
+            <li>
+                {{ student.name }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Join Us!</h2>
+    <a href="{% url 'add_course' %}">Apply to the course {{ course.title }}</a>
+    <br>
+    <a href="{% url 'main' %}">Go back to list of courses</a>
+{% endblock %}

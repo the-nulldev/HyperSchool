@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p>Hi! Welcome to the site of online HyperSchool!</p>
+    <p>Feel free to choose any specialty you are interested in!</p>
+
+    <a href="/signup/">Sign up</a>
+    <br>
+    <a href="/login/">Login</a>
+    <br>
+
+    <form class="search" name="q" method="GET">
+        {% csrf_token %}
+
+        <input type="text" name="q" placeholder="Search...">
+        <input type="submit" value="Search">
+    </form>
+    <p>{{ courses|length }} courses</p>
+    <ol>
+        {% for course in courses %}
+            <li><a href="{% url 'course_details' course.id %}">{{ course.title }}</a></li>
+        {% endfor %}
+    </ol>
+{% endblock %}
